@@ -14,8 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        depthMap("PNG/1.JPG", "PNG/2.JPG", "out1.png");
-        depthMap("PNG/3.JPG", "PNG/4.JPG", "out2.png");
+        depthMap("PNG/1_2.png", "PNG/1_1.png", "out3.png");
     }
 
     private static void depthMap(String img1, String img2, String outImg){
@@ -25,7 +24,7 @@ public class Main {
         Mat grayImage2 = new Mat();
         cvtColor(image1, grayImage1, COLOR_RGB2GRAY);
         cvtColor(image2, grayImage2, COLOR_RGB2GRAY);
-        StereoBM stereo = StereoBM.create(0, 21);
+        StereoBM stereo = StereoBM.create(16, 15);
         Mat disparity = new Mat();
         stereo.compute(grayImage1, grayImage2, disparity);
         imwrite(outImg, disparity);
